@@ -10,7 +10,7 @@ const { normalizeActionName } = require("../custom-modules/zoro-utils");
 var express = require("express");
 var router = express.Router();
 
-router.route("/").get(genericGet(ContactModel)).post(GenericPost(ContactModel)); // POST user
+router.route("/").get(GenericGet(ContactModel)).post(GenericPost(ContactModel)); // POST user
 
 // infer controller action method by action querry param and call it
 router.route("/:action").post((req, res, next) => {
