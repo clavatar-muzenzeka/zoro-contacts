@@ -1,9 +1,9 @@
 /**
  * By clavatar
  */
-const UserModel = require("../models/user.model");
+const ContactModel = require("../models/contact.model");
 const GenericPost = require("../libraries/middlewares/generic-post.middleware");
-const UserControler = require("../controllers/user.controller");
+//const UserControler = require("../controllers/user.controller");
 const { normalizeActionName } = require("../custom-modules/zoro-utils");
 
 var express = require("express");
@@ -14,7 +14,7 @@ router
   .get(function (req, res, next) {
     res.render("index", { title: "Express" });
   })
-  .post(GenericPost(UserModel)); // POST user
+  .post(GenericPost(ContactModel)); // POST user
 
 // infer controller action method by action querry param and call it
 router.route("/:action").post((req, res, next) => {

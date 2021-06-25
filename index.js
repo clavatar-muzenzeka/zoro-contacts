@@ -4,7 +4,7 @@ const createError = require("http-errors");
 const express = require("express");
 const mongoose = require("mongoose");
 var debug = require("debug")(subApplicationName); // flavoured console.log()
-const userRouter = require("./routers/user.router");
+const contactRouter = require("./routers/contact.router");
 const InternalErrorsMapper = require("./libraries/middlewares/inner-error-to-error-respons.middleware");
 const ErrorResponse = require("./custom-modules/zoro-errors-glossary/error-response.class");
 
@@ -51,13 +51,15 @@ function _initApp(express) {
    */
   var logger = require("morgan");
   app.use(logger("dev"));
+  const cors = require("cors");
+  app.use(cors({ origin: "*" }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   /**
    * eof remove on nested
    */
 
-  app.use(userRouter);
+  app.use(contactRouter);
 
   /**
    * ANCHOR remove on nested

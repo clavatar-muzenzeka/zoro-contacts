@@ -18,6 +18,7 @@ const Utils = require("../../custom-modules/zoro-utils");
  * @param {express.next} next next middleware
  */
 const errorHandler = (err, req, res, next) => {
+  console.log("error ", err);
   let error;
   // cast error
   if (err.name === "CastError") {
@@ -36,11 +37,14 @@ const errorHandler = (err, req, res, next) => {
   // Any validation error
   if (err.code !== 1100 && err.name !== "CastError") {
     if (err.toRESTResponse) {
-        next(err)
-    }
-    else {
-      const message = Object.values(err.errors).map((val) => val.message);
-      let matchingError = Utils.findErrorClassByMessage(message);
+      next(err);
+    } else {
+      let message = Object.values(err.errors).map((val) => val.message);
+      if (Array.isArray(message)) message = message[0];
+      let matchingError = Utils.findErrorClassByMessage(
+        errorsGlossary,
+        message
+      );
       if (matchingError) error = new matchingError({});
       else error = new ZoroErrorUnknown({});
     }

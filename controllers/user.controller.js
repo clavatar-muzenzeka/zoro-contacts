@@ -8,7 +8,7 @@ const {
   ZoroErrorUserFreezed
 } = require("../custom-modules/zoro-errors-glossary/zoro-errors-glossary");
 const GenericResponse = require("../libraries/generic-response.class");
-const UserModel = require("../models/user.model");
+const UserModel = require("../models/contact.model");
 
 /**
  * Users sign up
