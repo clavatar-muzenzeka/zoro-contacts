@@ -11,7 +11,8 @@ const GenericReponse = require("../generic-response.class");
  * @param {Mongoose.Model} model model in witch data will be inserted
  */
 module.exports = (model, contextName) => async (req, res, next) => {
-  model.find({ deleted: false }, {}, req.query).exec((error, fetched) => {
+  model.find({ deleted: false }, {}, {skip : +req.query['skip'], limit: +req.query['limit'] }).exec((error, fetched) => {
+
     res.status(200).json(new GenericReponse(fetched, {}));
   });
 };
